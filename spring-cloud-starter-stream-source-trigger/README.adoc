@@ -29,7 +29,6 @@ $$trigger.source.payload$$:: $$The expression for the payload of the Source modu
 $$trigger.time-unit$$:: $$The TimeUnit to apply to delay values.$$ *($$TimeUnit$$, default: `$$<none>$$`, possible values: `NANOSECONDS`,`MICROSECONDS`,`MILLISECONDS`,`SECONDS`,`MINUTES`,`HOURS`,`DAYS`)*
 //end::configuration-properties[]
 
-//end::ref-doc[]
 == Build
 
 ```
@@ -46,3 +45,4 @@ $ ./mvnw clean package
 ```
 java -jar trigger_source.jar --trigger.source.payload=payload-expression
 ```
+//end::ref-doc[]
