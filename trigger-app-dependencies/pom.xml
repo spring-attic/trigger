@@ -25,6 +25,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<profiles>
 		<profile>
 			<id>spring</id>

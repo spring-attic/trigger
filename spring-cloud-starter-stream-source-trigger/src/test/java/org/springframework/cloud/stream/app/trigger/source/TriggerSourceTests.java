@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright 2015-2018 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,19 +29,22 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Trigger source tests.
+ *
  * @author Ilayaperumal Gopinathan
+ * @author Artem Bilan
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @DirtiesContext
 public abstract class TriggerSourceTests {
 
 	@Autowired
-	@Bindings(TriggerSourceConfiguration.class)
 	protected Source triggerSource;
 
 	@Autowired
@@ -52,7 +55,8 @@ public abstract class TriggerSourceTests {
 
 		@Test
 		public void fixedDelayTest() throws InterruptedException {
-			assertTrue(messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload().equals("test"));
+			assertEquals("test",
+					messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload());
 		}
 	}
 
@@ -61,7 +65,8 @@ public abstract class TriggerSourceTests {
 
 		@Test
 		public void fixedDelayTest() throws InterruptedException {
-			assertTrue(messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload().equals(""));
+			assertEquals("",
+					messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload());
 		}
 	}
 
@@ -70,8 +75,10 @@ public abstract class TriggerSourceTests {
 
 		@Test
 		public void cronTriggerTest() throws InterruptedException {
-			assertTrue(messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload().equals("cronTest"));
-			assertTrue(messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload().equals("cronTest"));
+			assertEquals("cronTest",
+					messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload());
+			assertEquals("cronTest",
+					messageCollector.forChannel(triggerSource.output()).poll(2100, TimeUnit.MILLISECONDS).getPayload());
 		}
 	}
 
