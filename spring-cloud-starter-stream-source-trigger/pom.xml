@@ -55,6 +55,7 @@
 					<generatedApps>
 						<trigger-source/>
 					</generatedApps>
+					<enableContainerImageMetadata>true</enableContainerImageMetadata>
 				</configuration>
 			</plugin>
 		</plugins>
